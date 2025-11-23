@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Event-Booking/.vs/Event-Booking
+/Event-Booking/Core/bin/Debug/net9.0
+/Event-Booking/Core/obj
+/Event-Booking/Event-Booking/bin/Debug/net9.0
+/Event-Booking/Event-Booking/obj
+*.user
+/Event-Booking/Logic/bin/Debug/net9.0
+/Event-Booking/Logic/obj
+/.vs/Event-Booking-Platform/v17
+/.vs
+/Event-Booking/.vs/ProjectEvaluation
