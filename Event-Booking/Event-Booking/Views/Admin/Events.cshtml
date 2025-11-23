@@ -38,7 +38,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
-                <table class="table table-hover table-striped custom-table" id="dataTable">
+                <table class="table table-hover table-striped custom-table" id="dataTable" style="font-size:smaller">
                     <thead>
                         <tr>
                             <th> S/N</th>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="col-sm-12 col-lg-12">
                         <label class="col-form-label"> Event Date <span class="text-danger">*</span></label>
-                        <input class="form-control" type="text" id="eventDate" required>
+                        <input class="form-control" type="date" id="eventDate" required>
                     </div>
                     <div class="col-sm-12 col-lg-12">
                         <label class="col-form-label"> Event Summary <span class="text-danger">*</span></label>
@@ -188,11 +188,12 @@
                             <a class="btn btn-outline-primary rounded-pill p-2 d-block" id="deleteSubject" onclick="DeleteEvent()">Delete</a>
                         </div>
                         <div class="col-6">
-                            <a data-dismiss="modal" class="btn btn-outline-primary rounded-pill p-2 d-block">Cancel</a>
+                            <a data-bs-dismiss="modal" class="btn btn-outline-primary rounded-pill p-2 d-block">Cancel</a>
                         </div>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </div>

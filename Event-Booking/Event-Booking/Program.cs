@@ -3,15 +3,16 @@ using Core.DB;
 using Core.Models;
 using Logic.Helpers;
 using Logic.IHelpers;
+using Logic.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
-    builder.Configuration.GetConnectionString("BookingDB")));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BookingDB")));
 
 builder.Services.AddSingleton<IGeneralConfiguration>(builder.Configuration.GetSection("GeneralConfiguration").Get<GeneralConfiguration>());
+builder.Services.Configure<MemberBaseSettings>(builder.Configuration.GetSection("MemberBase"));
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -27,6 +28,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IUserHelper, UserHelper>();
+builder.Services.AddHttpClient<IMemberBaseService, MemberBaseService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

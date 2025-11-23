@@ -63,7 +63,7 @@
     </script>
 </head>
 <body>
-    <header id="header" class="header fixed-top d-flex align-items-center">
+    <header id="header" class="header fixed-top d-flex align-items-center mb-5">
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="#" class="logo d-flex align-items-center">
@@ -71,7 +71,7 @@
                 <i class="bi bi-book fs-3 px-2"></i>
                 <span class="d-none d-lg-block"> Event Booking </span>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
+            @* <i class="bi bi-list toggle-sidebar-btn"></i> *@
         </div><!-- End Logo -->
 
         <div class="search-bar">
@@ -112,7 +112,7 @@
                         </li>
                         <li>
                             <a class="dropdown-item d-flex align-items-center">
-                                <form method="post">
+                                <form method="Post" asp-action="Logout">
                                     <button class="btn"> <i class="bi bi-box-arrow-right"></i> <span> Logout </span></button>
                                 </form>
                             </a>
@@ -173,17 +173,17 @@
     
 
 
-    <div class="">
+    <div class="container" style="margin-top: 120px;">
         <main role="main" class="">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
+    @* <footer class="border-top footer text-muted">
+        <div class="container text-center">
             &copy; 2025 - Event_Booking - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer> *@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@

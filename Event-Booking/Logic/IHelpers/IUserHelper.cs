@@ -11,9 +11,10 @@ namespace Logic.IHelpers
     public interface IUserHelper
     {
         bool CheckExistingeventName(string title);
+        bool checkIfEmailExists(string email);
         bool CheckIfUserIsDeactivated(string email);
         bool CreateEvent(EventsViewModel eventsViewModel);
-        bool CreateEventBooking(EventBookingsViewModel bookingViewModel);
+        EventBookings CreateEventBooking(EventBookingsViewModel bookingViewModel);
         bool DeleteEvent(int id);
         Task<ApplicationUser> FindByEmailAsync(string email);
         ApplicationUser FindById(string Id);

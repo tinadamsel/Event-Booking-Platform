@@ -52,7 +52,7 @@ namespace Event_Booking.Controllers
                     var createUser = await _userHelper.RegisterUser(appUserViewModel).ConfigureAwait(false);
                     if (createUser)
                     {
-                        return Json(new { isError = false, msg = "Registration Successful, Login to your email and follow the instructions" });
+                        return Json(new { isError = false, msg = "Registration Successful " });
                     }
                     return Json(new { isError = true, msg = "Unable to register" });
                 }
@@ -86,7 +86,7 @@ namespace Event_Booking.Controllers
                     var createUser = await _userHelper.RegisterAdmin(appUserViewModel).ConfigureAwait(false);
                     if (createUser)
                     {
-                        return Json(new { isError = false, msg = "Registration Successful, Login to your email and follow the instructions" });
+                        return Json(new { isError = false, msg = "Registration Successful" });
                     }
                     return Json(new { isError = true, msg = "Unable to register" });
                 }
@@ -134,6 +134,21 @@ namespace Event_Booking.Controllers
                 return Json(new { isError = true, msg = "Account does not exist, contact admin" });
             }
             return Json(new { isError = true, msg = "Username and Password Required" });
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> LogOut()
+        {
+            try
+            {
+                await _signInManager.SignOutAsync();
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception exp)
+            {
+                throw exp;
+            }
         }
     }
 }

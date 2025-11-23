@@ -124,7 +124,7 @@ namespace Logic.Helpers
                     user.PhoneNumber = userDetails.Phonenumber;
                     user.DateRegistered = DateTime.Now;
                     user.Deactivated = false;
-                    user.IsAdmin = false;
+                    user.IsAdmin = true;
                     var createUser = await _userManager.CreateAsync(user, userDetails.Password).ConfigureAwait(false);
                     if (createUser.Succeeded)
                     {
@@ -143,7 +143,7 @@ namespace Logic.Helpers
         {
             if (email != null)
             {
-                var CheckUser = _context.ApplicationUser.Where(x => x.Email == email && !x.Deactivated).FirstOrDefault();
+                var CheckUser = _context.ApplicationUser.Where(x => x.Email == email && x.Deactivated).FirstOrDefault();
                 if (CheckUser != null)
                 {
                     return true;
@@ -278,7 +278,20 @@ namespace Logic.Helpers
             return null;
         }
 
-        public bool CreateEventBooking(EventBookingsViewModel bookingViewModel)
+        public bool checkIfEmailExists(string email)
+        {
+            if (email != null)
+            {
+                var checkEmail = _context.Bookings.Where(x => x.Email == email && x.Active).FirstOrDefault();
+                if (checkEmail != null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public EventBookings CreateEventBooking(EventBookingsViewModel bookingViewModel)
         {
             if (bookingViewModel != null)
             {
@@ -286,7 +299,8 @@ namespace Logic.Helpers
                 {
                     EventId = bookingViewModel.EventId,
                     BookerId = bookingViewModel.BookerId,
-                    Name = bookingViewModel.Name,
+                    FirstName = bookingViewModel.FirstName,
+                    LastName = bookingViewModel.LastName,
                     Email = bookingViewModel.Email,
                     Note = bookingViewModel.Note,
                     BookingStatus = EventEnum.BookingStatus.Pending,
@@ -295,9 +309,9 @@ namespace Logic.Helpers
                 };
                 _context.Bookings.Add(creatEventbooking);
                 _context.SaveChanges();
-                return true;
+                return creatEventbooking;
             }
-            return false;
+            return null;
         }
     }
 }

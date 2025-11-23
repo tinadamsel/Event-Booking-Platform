@@ -1,6 +1,5 @@
 ﻿
 function Register() {
-    debugger
     var defaultBtnValue = $('#submit_btn').html();
     $('#submit_btn').html("Please wait...");
     $('#submit_btn').attr("disabled", true);
@@ -49,7 +48,6 @@ function Register() {
         errorAlert("Please fill in your Password");
         return;
     }
-    debugger
     let userDetails = JSON.stringify(data);
     $.ajax({
         type: 'Post',
@@ -80,8 +78,86 @@ function Register() {
 
 }
 
+function AdminRegister() {
+    var defaultBtnValue = $('#submit_btn').html();
+    $('#submit_btn').html("Please wait...");
+    $('#submit_btn').attr("disabled", true);
+
+    var data = {};
+    data.FirstName = $('#firstname').val();
+    data.LastName = $('#lastname').val();
+    data.Phonenumber = $('#phone').val();
+    data.Email = $('#email').val();
+    data.Password = $('#password').val();
+    data.ConfirmPassword = $('#confirmPassword').val();
+
+    if (data.FirstName == "" || data.FirstName == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please fill in your FirstName");
+        return;
+    }
+    if (data.LastName == "" || data.LastName == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please fill in your LastName");
+        return;
+    }
+    if (data.Phonenumber == "" || data.Phonenumber == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please fill in your Phonenumber");
+        return;
+    }
+    if (data.Email == "" || data.Email == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please fill in your Email");
+        return;
+    }
+    if (data.Password == "" || data.Password == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please fill in your Password");
+        return;
+    }
+    if (data.ConfirmPassword == "" || data.ConfirmPassword == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please fill in your Password");
+        return;
+    }
+    let userDetails = JSON.stringify(data);
+    $.ajax({
+        type: 'Post',
+        url: '/Account/AdminRegistration',
+        dataType: 'json',
+        data:
+        {
+            userDetails: userDetails,
+        },
+        success: function (result) {
+            if (!result.isError) {
+                var url = '/Account/Login';
+                successAlertWithRedirect(result.msg, url);
+                $('#submit_btn').html(defaultBtnValue);
+            }
+            else {
+                $('#submit_btn').html(defaultBtnValue);
+                $('#submit_btn').attr("disabled", false);
+                errorAlert(result.msg);
+            }
+        },
+        error: function (ex) {
+            $('#submit_btn').html(defaultBtnValue);
+            $('#submit_btn').attr("disabled", false);
+            errorAlert("Please check and try again. Contact Admin if issue persists..");
+        },
+    })
+
+}
+
 function login() {
-    debugger
     var defaultBtnValue = $('#submit_btn').html();
     $('#submit_btn').html("Please wait...");
     $('#submit_btn').attr("disabled", true);
@@ -98,7 +174,6 @@ function login() {
             password: password
         },
         success: function (result) {
-            debugger
             if (!result.isError) {
                 var n = 1;
                 localStorage.removeItem("on_load_counter");
@@ -121,7 +196,6 @@ function login() {
 }
 
 function addEvent() {
-    debugger
     var defaultBtnValue = $('#submit_btn').html();
     $('#submit_btn').html("Please wait...");
     $('#submit_btn').attr("disabled", true);
@@ -172,7 +246,7 @@ function addEvent() {
                 eventDetails: eventDetails,
             },
             success: function (result) {
-                debugger;
+               
                 if (!result.isError) {
                     var url = '/Admin/Events';
                     successAlertWithRedirect(result.msg, url);
@@ -193,8 +267,8 @@ function addEvent() {
     
 }
 
-function Eventedit(id) {
-    debugger
+function eventToBeEdited(id) {
+   
     $.ajax({
         type: 'Get',
         dataType: 'Json',
@@ -203,14 +277,16 @@ function Eventedit(id) {
             id: id
         },
         success: function (result) {
-            debugger
+          
             if (!result.isError) {
                 $('#eventId').val(result.id);
                 $('#edit_eventTitle').val(result.title);
                 $('#edit_eventSummary').val(result.summary);
                 $('#edit_eventLocation').val(result.eventLocation);
                 $('#edit_eventCapacity').val(result.eventCapacity);
-                $('#edit_eventDate').val(result.eventDate);
+                var rawDate = new Date(result.eventDate);
+                var formattedDate = rawDate.toISOString().substring(0, 10);
+                $('#edit_eventDate').val(formattedDate);
 
                 $('#edit_event').modal('show');
             }
@@ -225,7 +301,7 @@ function Eventedit(id) {
 }
 
 function SaveEditedEvent() {
-    debugger
+   
     var defaultBtnValue = $('#submit_Btn').html();
     $('#submit_Btn').html("Please wait...");
     $('#submit_Btn').attr("disabled", true);
@@ -303,13 +379,13 @@ function DeleteEvent() {
 }
 
 function eventToDelete(id) {
-    debugger
+   
     $('#eventId').val(id);
     $('#delete_event').modal('show');
 }
 
 function GetBookingForm(id) {
-    debugger
+  
     $.ajax({
         type: 'GET',
         url: '/User/BookingForm',
@@ -324,22 +400,30 @@ function GetBookingForm(id) {
 }
 
 function BookNow() {
-    debugger
+    
     var defaultBtnValue = $('#submit_btn').html();
     $('#submit_btn').html("Please wait...");
     $('#submit_btn').attr("disabled", true);
 
     var data = {};
-    data.Name = $('#name').val();
+    data.FirstName = $('#firstname').val();
+    data.LastName = $('#lastname').val();
     data.Email = $('#email').val();
     data.BookerId = $('#booker_Id').val();
     data.EventId = $('#event_Id').val();
     data.Note = $('#note').val();
 
-    if (data.Name == "" || data.Name == undefined) {
+    if (data.FirstName == "" || data.FirstName == undefined) {
         $('#submit_btn').html(defaultBtnValue);
         $('#submit_btn').attr("disabled", false);
-        errorAlert("Please fill in your name");
+        errorAlert("Please fill in your Firstname");
+        return;
+    }
+
+    if (data.LastName == "" || data.LastName == undefined) {
+        $('#submit_btn').html(defaultBtnValue);
+        $('#submit_btn').attr("disabled", false);
+        errorAlert("Please fill in your Lastname");
         return;
     }
     if (data.Email == "" || data.Email == undefined) {

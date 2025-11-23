@@ -11,7 +11,8 @@ namespace Core.Models
 {
     public class EventBookings : BaseModel
     {
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public string? Note { get; set; }
         public int EventId { get; set; }

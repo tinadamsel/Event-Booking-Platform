@@ -27,16 +27,16 @@
                         @foreach (var events in Model)
                         {
                             <div class="col-lg-4 col-md-4">
-                                <div class="card info-card sales-card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">@events.Title </h5>
+                                <div class="card info-card sales-card p-3">
+                                    <div class="card-body text-center">
+                                        <h3 class="text-center text-success" style=" font-weight: 900;">@events.Title </h3>
                                         <div class="d-flex align-items-center">
-                                            <div class="ps-3">
-                                                <h3> @events.EventLocation</h3>
-                                                <h6> @events.EventDate</h6>
+                                            <div class="ps-3 card-title text center">
+                                                <h5> @events.EventLocation</h5>
+                                                <h5> @events.EventDate.ToString("D")</h5>
                                             </div> 
                                         </div>
-                                        <a asp-action="EventDetailPage" asp-controller="User" asp-route-id="@events.Id"> Read More...</a>
+                                        <a asp-action="EventDetailPage" asp-controller="User" asp-route-id="@events.Id" class="text-center"> Read More...</a>
                                     </div>
                                 </div>
                             </div>

@@ -4,39 +4,47 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Book Event </h5>
 
-            <form>
-                <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">Name</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="name" required>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">Email</label>
-                    <div class="col-sm-8">
-                        <input type="email" class="form-control" id="email" required>
-                        <input value="@Model.EventId" class="form-control" id="event_Id" required>
-                        <input value="@Model.BookerId" class="form-control" id="booker_Id" required>
-                    </div>
+<form class="p-3">
 
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">Additional Note <small> (Optional)</small></label>
-                    <div class="col-sm-8">
-                        <textarea rows="10" cols="4" type="text" class="form-control" id="note" required> </textarea>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <button type="button" class="btn btn-outline-primary" id="submit_btn" onclick="BookNow()"> BookNow </button>
-                    <button type="reset" class="btn btn-primary">Reset</button>
-                </div>
-            </form><!-- End Horizontal Form -->
-
+    <div class="row mb-2">
+        <label class="col-sm-4 col-form-label">First Name</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="firstname" required>
         </div>
     </div>
+
+    <div class="row mb-2">
+        <label class="col-sm-4 col-form-label">Last Name</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="lastname" required>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <label class="col-sm-4 col-form-label">Email</label>
+        <div class="col-sm-8">
+            <input type="email" class="form-control mb-1" id="email" required>
+
+            <!-- Hidden inputs should not add spacing -->
+            <input type="hidden" value="@Model.EventId" id="event_Id">
+            <input type="hidden" value="@Model.BookerId" id="booker_Id">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-4 col-form-label">
+            Additional Note <small>(Optional)</small>
+        </label>
+        <div class="col-sm-8">
+            <textarea rows="5" class="form-control" id="note"></textarea>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <button type="button" class="btn btn-outline-primary px-4" onclick="BookNow()">Book Now</button>
+        <button type="reset" class="btn btn-primary px-4 ms-2">Reset</button>
+    </div>
+
+</form>
 
