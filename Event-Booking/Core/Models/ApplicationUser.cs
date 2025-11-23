@@ -21,6 +21,7 @@ namespace Core.Models
         [Display(Name = "Date Registered")]
         public DateTime DateRegistered { get; set; }
         public bool IsAdmin { get; set; }
+        public bool Deactivated { get; set; }
 
 
     }

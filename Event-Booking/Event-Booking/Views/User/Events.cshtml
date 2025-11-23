@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Core.ViewModels.EventsViewModel>
+
+@{
+    ViewData["Title"] = "Events";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Home</a></li>
+                <li class="breadcrumb-item active"> Upcoming Events</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                @if (Model != null)
+                {
+                    <div class="row">
+                        <!-- Start Card -->
+                        @foreach (var events in Model)
+                        {
+                            <div class="col-lg-4 col-md-4">
+                                <div class="card info-card sales-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@events.Title </h5>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ps-3">
+                                                <h3> @events.EventLocation</h3>
+                                                <h6> @events.EventDate</h6>
+                                            </div> 
+                                        </div>
+                                        <a asp-action="EventDetailPage" asp-controller="User" asp-route-id="@events.Id"> Read More...</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <!-- End Card -->
+
+                    </div>
+                }
+
+
+            </div><!-- End Left side columns -->
+
+        </div>
+    </section>
+
+</main><!-- End #main -->

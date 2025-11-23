@@ -11,6 +11,9 @@ namespace Core.Models
 {
     public class EventBookings : BaseModel
     {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string? Note { get; set; }
         public int EventId { get; set; }
         [ForeignKey("EventId")]
         public virtual Events Event { get; set; }

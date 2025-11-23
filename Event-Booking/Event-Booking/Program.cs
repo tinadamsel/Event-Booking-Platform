@@ -1,6 +1,8 @@
 using Core.config;
 using Core.DB;
 using Core.Models;
+using Logic.Helpers;
+using Logic.IHelpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +26,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<IUserHelper, UserHelper>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,7 +46,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Account}/{action=Register}/{id?}")
     .WithStaticAssets();
 
 

@@ -1,0 +1,85 @@
+﻿@model Core.ViewModels.EventsViewModel
+
+@{
+    ViewData["Title"] = "Events Details";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Home</a></li>
+                <li class="breadcrumb-item active"> Event Details </li>
+            </ol>
+        </nav>
+    </div>
+</main>
+    <!-- End Page Title -->
+
+   <!-- Event Details-->
+     @if(Model != null)
+     {
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-sm-12 col-md-8 mx-auto">
+                    <div class="d-flex align-items-center">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 mb-2">
+                                <div class="card title">
+                                    <p class="mb-3"> @Model.Title</p>
+                                    <p class="mb-3"> @Model.EventLocation</p>
+                                    <p class="mb-3"> @Model.EventCapacity</p>
+                                    <p class="mb-3"> @Model.EventDate.ToString("D")</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-8">
+                                <div class="card-text">
+                                    <p class="mb-3"> @Model.Summary </p>
+                                </div>
+                                <div class="p-3 justify-content-center">
+                                    <button class="btn btn-outline-primary" onclick="BookEvent('@Model.Id')"> Book Now </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      }
+
+
+<!-- Partial View Modal-->
+  <div class="modal fade" id="bookEventModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> <b> Book Event </b> </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="bookingContent"> 
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    	<div class="crm_customer_table_main_wrapper float_left">
+		<div class="crm_ct_search_wrapper">
+			<div class="modal fade question_modal" id="userModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content bg-dark">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="sv_question_pop float_left" id="userContent">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
